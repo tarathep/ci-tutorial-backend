@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/tarathep/go-server-crud/apis"
+	"github.com/tarathep/tutorial-backend/apis"
 )
 
 // Router to apis lisening
@@ -27,6 +27,10 @@ func CORSMiddleware() gin.HandlerFunc {
 	}
 }
 
+func health(c *gin.Context) {
+	c.String(200, "ok")
+}
+
 // Route is setup router
 func (router Router) Route() *gin.Engine {
 
@@ -34,6 +38,8 @@ func (router Router) Route() *gin.Engine {
 
 	r := gin.Default()
 	r.Use(CORSMiddleware())
+
+	r.GET("/health", health)
 
 	r.GET("/api/tutorials", router.TutorialAPIs.ReadTutorials)
 	r.GET("/api/tutorials/:id", router.TutorialAPIs.ReadTutorial)

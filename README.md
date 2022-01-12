@@ -58,7 +58,7 @@ go mod verify
 ## Environment Variables
 
 |Variable|Default|Example|
-|---|---|---|
+|:---|:---|:---|
 MONGODB_CONNECTION_STRING|mongodb://127.0.0.1:27017|mongodb://root:password@192.168.1.102:27017|
 |PORT|8089|8089|
 
@@ -71,11 +71,53 @@ go run main.go
 
 ## APIs
 
-Method | URL | Request | Response
---- | --- | --- | ---
-GET | /api/tutorials | | [{"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"},{"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"}]
-GET | /api/tutorials/602aa1e04f3b51804eca6917 ||{"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"}
-POST | /api/tutorials | {"title":"xx","description":"xx Description"} | Inserted a single document Success
-PUT | /api/tutorials | {"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"} | Updated  a single document Success
-DELETE | /api/tutorials/602aa1e04f3b51804eca6917 ||Deleted id:602aa1e04f3b51804eca6917
-DELETE | /api/tutorials ||All deleted
+- ``GET : /api/tutorials``
+
+  response body
+  ```json
+  "id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"},{"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T
+  ```
+- ``GET : /api/tutorials/602aa1e04f3b51804eca6917``
+
+  response body
+  ```json
+  {"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"}
+  ```
+- ``POST : /api/tutorials``
+  
+  request body
+  ```json
+  {"title":"xx","description":"xx Description"}
+  ```
+  
+  response body
+  ```json
+  Inserted a single document Success
+  ```
+
+- ``PUT : /api/tutorials``
+  
+  request body
+  ```json
+  {"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"}
+  ```
+  
+  response body
+  ```json
+  Updated  a single document Success
+  ```
+
+- ``DELETE : /api/tutorials``
+   
+  response body
+  ```json
+  All deleted
+  ```
+- ``DELETE : /api/tutorials/602aa1e04f3b51804eca6917``
+    
+  response body
+  ```json
+  Deleted id:602aa1e04f3b51804eca6917
+  ```
+
+

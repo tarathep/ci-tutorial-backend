@@ -2,7 +2,12 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
+
+	"github.com/tarathep/tutorial-backend/apis"
+	"github.com/tarathep/tutorial-backend/db"
+	"github.com/tarathep/tutorial-backend/router"
 )
 
 func main() {
@@ -20,12 +25,12 @@ func main() {
 	}
 
 	fmt.Println(dbconn)
-	// db, err := db.Init(dbconn)
-	// if err != nil {
-	// 	log.Panic(err)
-	// }
+	db, err := db.Init(dbconn)
+	if err != nil {
+		log.Panic(err)
+	}
 
-	// route := router.Router{apis.TutorialHandler{db}}
+	route := router.Router{apis.TutorialHandler{db}}
 
-	// route.Route().Run(":" + port)
+	route.Route().Run(":" + port)
 }

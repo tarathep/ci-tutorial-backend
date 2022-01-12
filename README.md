@@ -78,7 +78,7 @@ go run main.go
 
   response body
   ```json
-  {"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"},{"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T
+  [{"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"},{"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"}]
   ```
 - ``GET : /api/tutorials/602aa1e04f3b51804eca6917``
 
@@ -95,7 +95,7 @@ go run main.go
   
   response body
   ```json
-  Inserted a single document Success
+  {"code":"200","message":"Inserted a single document Success"}
   ```
 
 - ``PUT : /api/tutorials``
@@ -107,20 +107,20 @@ go run main.go
   
   response body
   ```json
-  Updated  a single document Success
+  {"code":"200","message":"Updated  a single document Success"}
   ```
 
 - ``DELETE : /api/tutorials``
    
   response body
   ```json
-  All deleted
+  {"code":"200","message":"All deleted"}
   ```
 - ``DELETE : /api/tutorials/602aa1e04f3b51804eca6917``
     
   response body
   ```json
-  Deleted id:602aa1e04f3b51804eca6917
+  {"code":"200","message":"Deleted id 602aa1e04f3b51804eca6917"}
   ```
 
 ## Unit Test

@@ -57,10 +57,13 @@ go mod verify
 
 ## Environment Variables
 
-|Variable|Default|Example|
-|:---|:---|:---|
-MONGODB_CONNECTION_STRING|mongodb://127.0.0.1:27017|mongodb://root:password@192.168.1.102:27017|
-|PORT|8089|8089|
+- ``MONGODB_CONNECTION_STRING``
+  - default : mongodb://127.0.0.1:27017
+  - example : mongodb://root:password@192.168.1.102:27017
+- ``PORT``
+  - default : 8089
+
+
 
 ## Run
 
@@ -75,7 +78,7 @@ go run main.go
 
   response body
   ```json
-  "id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"},{"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T
+  {"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T00:00:00Z","updatedAt":"0001-01-01T00:00:00Z"},{"id":"602aa1e04f3b51804eca6917","title":"yy","description":"xx Description","published":false,"createdAt":"0001-01-01T
   ```
 - ``GET : /api/tutorials/602aa1e04f3b51804eca6917``
 
@@ -120,4 +123,32 @@ go run main.go
   Deleted id:602aa1e04f3b51804eca6917
   ```
 
+## Unit Test
 
+test
+
+```bash
+go test
+```
+
+test with create cover profile
+```bash
+go test -coverprofile coverage.out ./...
+```
+
+export report html
+```bash
+go tool cover -html coverage.out -o report.html
+```
+
+## Docker 
+
+build image
+```bash
+docker build -t tutorial-be:0.0.1 .
+```
+
+run container
+```bash
+docker run -it --rm --name tutorial-backend -p 8089:8089 -e MONGODB_CONNECTION_STRING=mongodb://root:password@192.168.1.102:27017 tutorial-be:0.0.1
+```

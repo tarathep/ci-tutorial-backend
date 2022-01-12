@@ -62,12 +62,6 @@ github.com/pmezard/go-difflib/difflib
 # github.com/stretchr/testify v1.7.0
 ## explicit; go 1.13
 github.com/stretchr/testify/assert
-# github.com/tarathep/go-server-crud v0.0.0-20210219110837-0438255ac167
-## explicit
-github.com/tarathep/go-server-crud/apis
-github.com/tarathep/go-server-crud/db
-github.com/tarathep/go-server-crud/model
-github.com/tarathep/go-server-crud/router
 # github.com/ugorji/go/codec v1.1.7
 ## explicit
 github.com/ugorji/go/codec

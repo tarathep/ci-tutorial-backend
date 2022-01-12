@@ -5,7 +5,6 @@ go 1.17
 require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/stretchr/testify v1.7.0
-	github.com/tarathep/go-server-crud v0.0.0-20210219110837-0438255ac167
 	go.mongodb.org/mongo-driver v1.8.2
 )
 

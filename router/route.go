@@ -1,6 +1,8 @@
 package router
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/tarathep/tutorial-backend/apis"
 )
@@ -28,7 +30,17 @@ func CORSMiddleware() gin.HandlerFunc {
 }
 
 func health(c *gin.Context) {
-	c.String(200, "ok")
+
+	type Resp struct {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+
+	c.JSON(http.StatusOK, Resp{
+		Code:    "200",
+		Message: "ok",
+	})
+
 }
 
 // Route is setup router

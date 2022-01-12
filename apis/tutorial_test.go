@@ -1,4 +1,4 @@
-package main
+package apis_test
 
 import (
 	"net/http"
@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tarathep/go-server-crud/apis"
-	"github.com/tarathep/go-server-crud/model"
-	"github.com/tarathep/go-server-crud/router"
+	"github.com/tarathep/tutorial-backend/apis"
+	"github.com/tarathep/tutorial-backend/model"
+	"github.com/tarathep/tutorial-backend/router"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -70,7 +70,6 @@ func (db *mockDB) FindAllPublished() ([]*model.Tutorial, error) {
 	}, nil
 }
 
-// TESTS
 func TestReadTutorials(t *testing.T) {
 
 	req, _ := http.NewRequest("GET", "/api/tutorials", nil)
@@ -124,7 +123,7 @@ func TestCreateTutorial(t *testing.T) {
 	assert.NotNil(t, w.Body)
 
 	//test body response
-	assert.Equal(t, strings.Trim(w.Body.String(), "\n"), `Inserted a single document Success`)
+	assert.Equal(t, strings.Trim(w.Body.String(), "\n"), `{"code":"200","message":"Inserted a single document Success"}`)
 }
 
 func TestUpdateTutorial(t *testing.T) {
@@ -141,7 +140,7 @@ func TestUpdateTutorial(t *testing.T) {
 	assert.NotNil(t, w.Body)
 
 	//test body response
-	assert.Equal(t, strings.Trim(w.Body.String(), "\n"), `Updated a single document Success`)
+	assert.Equal(t, strings.Trim(w.Body.String(), "\n"), `{"code":"200","message":"Updated a single document Success"}`)
 }
 
 func TestDeleteTutorial(t *testing.T) {
@@ -158,7 +157,7 @@ func TestDeleteTutorial(t *testing.T) {
 	assert.NotNil(t, w.Body)
 
 	//test body response
-	assert.Equal(t, strings.Trim(w.Body.String(), "\n"), `Deleted id:602aa1e04f3b51804eca6917`)
+	assert.Equal(t, strings.Trim(w.Body.String(), "\n"), `{"code":"200","message":"Deleted id 602aa1e04f3b51804eca6917"}`)
 }
 
 func TestDeleteTutorials(t *testing.T) {
@@ -175,5 +174,5 @@ func TestDeleteTutorials(t *testing.T) {
 	assert.NotNil(t, w.Body)
 
 	//test body response
-	assert.Equal(t, strings.Trim(w.Body.String(), "\n"), `All deleted`)
+	assert.Equal(t, strings.Trim(w.Body.String(), "\n"), `{"code":"200","message":"All deleted"}`)
 }

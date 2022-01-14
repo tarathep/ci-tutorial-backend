@@ -38,8 +38,10 @@ jobs:
     # - name: Install dependencies
     #   run: npm install
 
-    # - name: Unit test
-    #   run: npm run test:unit
+    - name: Unit test
+      run: go test -coverprofile coverage.out ./...
+      
+    - run: go tool cover -html coverage.out -o report.html
 
     # - name: Upload Reports
     #   uses: actions/upload-artifact@v2

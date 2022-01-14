@@ -33,21 +33,25 @@ jobs:
       with:
         go-version: '^1.17.6' # The Go version to download (if necessary) and use.
     
-    - run: go version
+    - run: |
+        go version
 
-    # - name: Install dependencies
-    #   run: npm install
+    - name: Install dependencies
+      run: |
+        go get -u github.com/gin-gonic/gin
+        go get -u go.mongodb.org/mongo-driver/mongo
+        go get -u github.com/stretchr/testify
 
     - name: Unit test
-      run: go test -coverprofile coverage.out ./...
-      
-    - run: go tool cover -html coverage.out -o report.html
+      run: |
+        go test -coverprofile coverage.out ./...
+        go tool cover -html coverage.out -o report.html
 
-    # - name: Upload Reports
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: Unit Test Results
-    #     path: '${{ github.workspace }}/coverage/lcov-report/*'
+    - name: Upload Reports
+      uses: actions/upload-artifact@v2
+      with:
+        name: Unit Test Results
+        path: '${{ github.workspace }}/report.html'
     
   # analyze:
   #   name: SAST CodeQL
@@ -98,41 +102,33 @@ jobs:
   #   - name: Perform CodeQL Analysis
   #     uses: github/codeql-action/analyze@v1
 
-  # build:
-  #   name: Build
-  #   runs-on: ubuntu-latest
-  #   environment: 
-  #     name: dev
-  #     url: https://github.com/xxx/example-pipeline/actions/workflows/dev-node-express-app-deploy.yml
-  #   needs: [unitest]
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v2
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    environment: 
+      name: dev
+      url: https://github.com/xxx/example-pipeline/actions/workflows/dev-node-express-app-deploy.yml
+    needs: [unitest]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-  #   - name: "ACR login"
-  #     uses: azure/docker-login@v1
-  #     with:
-  #       login-server: ${{ env.CONTAINER_REPOSITORY }}
-  #       username: ${{ secrets.ACR_USERNAME }}
-  #       password: ${{ secrets.ACR_PASSWORD }}
+    - name: Build image
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        tags: ${{ env.CONTAINER_REPOSITORY }}/${{ env.APP_NAME }}:${{env.IMAGE_TAG}}
+    
+    - name: "ACR login"
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.CONTAINER_REPOSITORY }}
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
 
-  #   - name: Setup node
-  #     uses: actions/setup-node@v2
-  #     with:
-  #       node-version: '14'
-
-  #   - name: Install dependencies
-  #     run: npm install
-
-  #   - name: Build image
-  #     id: docker_build
-  #     uses: docker/build-push-action@v2
-  #     with:
-  #       context: .
-  #       tags: ${{ env.CONTAINER_REPOSITORY }}/${{ env.APP_NAME }}:${{env.IMAGE_TAG}}
-        
-  #   - name: Push image
-  #     run: docker image push ${{ env.CONTAINER_REPOSITORY }}/${{ env.APP_NAME }}:${{env.IMAGE_TAG}}
+    - name: Push image
+      run: docker image push ${{ env.CONTAINER_REPOSITORY }}/${{ env.APP_NAME }}:${{env.IMAGE_TAG}}
 
     # - name: Repository Dispatch
     #   uses: peter-evans/repository-dispatch@v1

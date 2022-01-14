@@ -38,9 +38,11 @@ jobs:
 
     - name: Install dependencies
       run: |
+        go env -w GO111MODULE=auto
         go get -u github.com/gin-gonic/gin
         go get -u go.mongodb.org/mongo-driver/mongo
         go get -u github.com/stretchr/testify
+        
 
     - name: Unit test
       run: |

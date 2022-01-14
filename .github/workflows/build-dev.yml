@@ -2,11 +2,7 @@ name: DEV - Build
 
 on:
   workflow_dispatch:
-    inputs:
-      env:
-        description: "Environment"
-        required: true
-        default: "dev"
+  
   push:
     branches:
       - main

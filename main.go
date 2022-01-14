@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -24,7 +23,6 @@ func main() {
 		port = "8089"
 	}
 
-	fmt.Println(dbconn)
 	db, err := db.Init(dbconn)
 	if err != nil {
 		log.Panic(err)

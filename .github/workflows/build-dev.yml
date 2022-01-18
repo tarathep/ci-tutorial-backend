@@ -5,10 +5,10 @@ on:
   
   push:
     branches:
-      - dev
+      - develop
   pull_request:
     branches:
-      - dev
+      - develop
 
 env:
   APP_NAME: tutorial-backend

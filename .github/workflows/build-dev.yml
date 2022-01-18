@@ -1,4 +1,4 @@
-name: DEV - Build
+name: SIT - Build
 
 on:
   workflow_dispatch:

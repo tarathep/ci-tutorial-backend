@@ -106,7 +106,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: dev
-      url: https://github.com/xxx/example-pipeline/actions/workflows/dev-node-express-app-deploy.yml
+      url: https://github.com/tarathep/tutorial-pipeline/actions/workflows/dev-tutorial-backend-deploy.yml
     needs: [unitest]
     steps:
     - name: Checkout code
@@ -129,10 +129,10 @@ jobs:
     - name: Push image
       run: docker image push ${{ env.CONTAINER_REPOSITORY }}/${{ env.APP_NAME }}:${{env.IMAGE_TAG}}
 
-    # - name: Repository Dispatch
-    #   uses: peter-evans/repository-dispatch@v1
-    #   with:
-    #     token: ${{ secrets.REPO_ACCESS_TOKEN }}
-    #     repository: corp-ais/example-pipeline
-    #     event-type: node-express-app-cd-dev
-    #     client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        repository: tarathep/tutorial-pipeline
+        event-type: tutorial-backend-cd-dev
+        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'

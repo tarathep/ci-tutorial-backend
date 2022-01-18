@@ -12,7 +12,7 @@ on:
 
 env:
   APP_NAME: tutorial-backend
-  CONTAINER_REPOSITORY: "acrtutorialazassedev001.azurecr.io"
+  CONTAINER_REPOSITORY: "acrtutorialazasse001.azurecr.io"
   IMAGE_TAG: "0.0.1-SNAPSHOT"
 
 jobs:

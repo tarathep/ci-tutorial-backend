@@ -2,11 +2,6 @@ name: SIT - Build
 
 on:
   workflow_dispatch:
-    inputs:
-      ref:
-        description: "Repository branch or tag"
-        required: true
-        default: "main"
   push:
     tags:
       - '*'

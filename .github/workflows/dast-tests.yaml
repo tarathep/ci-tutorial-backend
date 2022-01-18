@@ -1,0 +1,23 @@
+name: "DAST Testing"
+
+on:
+  repository_dispatch:
+    types: [tutorial-backend-dast-sit]
+  workflow_dispatch:
+    inputs:
+      env:
+        description: Environment
+        required: true
+        default: 'sit'
+
+jobs:
+  start-testing:
+    name: Start DAST Testing
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.env }}
+    steps:
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target: 'http://tutorial-${{ github.event.inputs.env }}.584d9c19d32846c3b161.southeastasia.aksapp.io/'
